@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="sample.EditData"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <children>
+  <!--  <Label layoutX="175.0" layoutY="93.0" text="Player ID" />
+  <TextField layoutX="286.0" layoutY="89.0" />                     -->
+    <Label layoutX="175.0" layoutY="129.0" text="First Name:" />
+    <Label layoutX="176.0" layoutY="173.0" prefHeight="17.0" prefWidth="78.0" text="Last Name:" />
+    <Label layoutX="175.0" layoutY="208.0" text="Address:" />
+    <Label layoutX="173.0" layoutY="247.0" text="Postal code:" />
+    <Label layoutX="174.0" layoutY="283.0" text="Province:" />
+    <Label layoutX="170.0" layoutY="322.0" text="Contact Number:" />
+
+    <TextField layoutX="286.0" layoutY="125.0" />
+    <TextField layoutX="286.0" layoutY="169.0" />
+    <TextField layoutX="286.0" layoutY="204.0" />
+    <TextField layoutX="286.0" layoutY="243.0" prefHeight="25.0" prefWidth="149.0" />
+    <TextField layoutX="286.0" layoutY="279.0" />
+    <TextField layoutX="286.0" layoutY="318.0" />
+    <Button layoutX="273.0" layoutY="374.0" mnemonicParsing="false" text="Submit changes" />
+    <Label layoutX="198.0" layoutY="24.0" text="Edit player's details" textFill="#ae3a3a">
+        <font>
+            <Font name="System Bold Italic" size="24.0" />
+        </font>
+    </Label>
+</children>
+</AnchorPane>
