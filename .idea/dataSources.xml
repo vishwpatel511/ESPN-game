@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="moviedb@localhost" uuid="9325990f-1e2c-4454-ab6f-1e3b9804bd36">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/moviedb</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="assignment@localhost" uuid="ef9b8cf1-6758-4637-ad39-635354416d66">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/assignment</jdbc-url>
+    </data-source>
+  </component>
+</project>

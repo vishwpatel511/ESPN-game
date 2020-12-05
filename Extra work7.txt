@@ -1,0 +1,6 @@
+Extra work need to be done: 
+
+1. Format the display data page with padding and backgroung image.
+2. Show data in the table view rather than using labels.
+3. User authentication using password and connect it to the player id.
+4. Give option to change password. (Don't need to verify the user.)
