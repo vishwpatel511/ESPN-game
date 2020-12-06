@@ -59,7 +59,7 @@ import java.util.*;
 
         {
 
-            try(  Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/assignment?autoReconnect=true&useSSL=false", "root", "");
+            try(  Connection connection = DBconfigration.getconnection();
             Statement statement = connection.createStatement();
                   ResultSet resultSet = statement.executeQuery(query);
                   ) {
@@ -123,7 +123,7 @@ import java.util.*;
                     EventHandler<ActionEvent> addplayer = new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent actionEvent) {
-                            try(Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/assignment?autoReconnect=true&useSSL=false", "root", "");
+                            try(Connection connection = DBconfigration.getconnection();
                                 PreparedStatement preparedStatementforadd = connection.prepareStatement(addQuery);
 
                             ) {
@@ -162,7 +162,7 @@ import java.util.*;
                 // respective player's data is displayed when clicked this button
         public void DisplaydataAction(ActionEvent actionEvent) throws IOException {
 
-            try(Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/assignment?autoReconnect=true&useSSL=false", "root", "");
+            try(Connection connection = DBconfigration.getconnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(q);
                 ) {
 
@@ -214,7 +214,7 @@ import java.util.*;
         //    edit.Editfields();
 
 
-            try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/assignment?autoReconnect=true&useSSL=false", "root", "");
+            try (Connection connection = DBconfigration.getconnection();
 
                  PreparedStatement preparedStatement1 = connection.prepareStatement(sqlQ);
                  ){
