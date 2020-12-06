@@ -31,6 +31,11 @@ import java.util.*;
 
     public class indexController extends Main implements Initializable {
 
+        private static String sqlQ = "Select * from player WHERE player_id = ?";
+        private static String query = "SELECT  * FROM player";
+        private static String addQuery = "INSERT INTO `player`(`player_id`, `first_name`, `last_name`, `address`, `postal_code`, `province`, `phone_number`) VALUES (?,?,?,?,?,?,?)";
+        private static String q = "Select * from player where player_id = ?";
+
         @FXML
         private ComboBox<String> playerCombobox = new ComboBox<String>();
         ObservableList<String> list = FXCollections.observableArrayList();
@@ -49,18 +54,15 @@ import java.util.*;
         }
 
         // Creating Database connection
-        Connection connection = null;
-        ResultSet resultSet = null;
-        String query;
-        String q;
+
+
 
         {
 
-            try {
-                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/assignment?autoReconnect=true&useSSL=false", "root", "");
-                Statement statement = connection.createStatement();
-                query = "SELECT  * FROM player";
-                resultSet = statement.executeQuery(query);
+            try(  Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/assignment?autoReconnect=true&useSSL=false", "root", "");
+            Statement statement = connection.createStatement();
+                  ResultSet resultSet = statement.executeQuery(query);
+                  ) {
 
                 while (resultSet.next()) {
                     list.add(resultSet.getString("player_id"));
@@ -69,6 +71,7 @@ import java.util.*;
             } catch (SQLException exception) {
                 exception.printStackTrace();
             }
+
         }
 
 
@@ -120,11 +123,10 @@ import java.util.*;
                     EventHandler<ActionEvent> addplayer = new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent actionEvent) {
-                            try {
-                                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/assignment?autoReconnect=true&useSSL=false", "root", "");
-                                String addQuery = "INSERT INTO `player`(`player_id`, `first_name`, `last_name`, `address`, `postal_code`, `province`, `phone_number`) VALUES (?,?,?,?,?,?,?)";
+                            try(Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/assignment?autoReconnect=true&useSSL=false", "root", "");
                                 PreparedStatement preparedStatementforadd = connection.prepareStatement(addQuery);
 
+                            ) {
                                 preparedStatementforadd.setString(1, playeridTxt.getText());
                                 preparedStatementforadd.setString(2, fnametxt.getText());
                                 preparedStatementforadd.setString(3, lnametxt.getText());
@@ -132,8 +134,8 @@ import java.util.*;
                                 preparedStatementforadd.setString(5, postalcodetxt.getText());
                                 preparedStatementforadd.setString(6, provincetxt.getText());
                                 preparedStatementforadd.setString(7, contacttxt.getText());
-
                                 preparedStatementforadd.executeUpdate();
+
                                 System.out.println("Player has been added successfully!");
                             }
                             catch (SQLException exception){
@@ -160,13 +162,13 @@ import java.util.*;
                 // respective player's data is displayed when clicked this button
         public void DisplaydataAction(ActionEvent actionEvent) throws IOException {
 
-            try {
+            try(Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/assignment?autoReconnect=true&useSSL=false", "root", "");
+                PreparedStatement preparedStatement = connection.prepareStatement(q);
+                ) {
 
                 //
-                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/assignment?autoReconnect=true&useSSL=false", "root", "");
                 int value = Integer.parseInt(this.playerCombobox.getSelectionModel().getSelectedItem());
-                q = "Select * from player WHERE player_id = ?";
-                PreparedStatement preparedStatement = connection.prepareStatement(q);
+
                 preparedStatement.setInt(1, value);
                 ResultSet rs = preparedStatement.executeQuery();
                 while (rs.next()) {
@@ -207,22 +209,23 @@ import java.util.*;
         }
 
         // Player can update their data by clicking the upadate button
-        public void UpdateButtonAction(ActionEvent actionEvent) throws IOException {
+        public void UpdateButtonAction(ActionEvent actionEvent) throws IOException, SQLException {
         //    EditData edit = new EditData();
         //    edit.Editfields();
 
 
-            try {
+            try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/assignment?autoReconnect=true&useSSL=false", "root", "");
+
+                 PreparedStatement preparedStatement1 = connection.prepareStatement(sqlQ);
+                 ){
 
                 //
-                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/assignment?autoReconnect=true&useSSL=false", "root", "");
                 int value = Integer.parseInt(this.playerCombobox.getSelectionModel().getSelectedItem());
-                String sqlQ = "Select * from player WHERE player_id = ?";
-                PreparedStatement preparedStatement1 = connection.prepareStatement(sqlQ);
+
                 preparedStatement1.setInt(1, value);
-
-
                 ResultSet rs1 = preparedStatement1.executeQuery();
+
+
                 while (rs1.next()) {
                  //   Parent displayplayers = FXMLLoader.load(getClass().getResource("EditData.fxml"));
                     Stage displayStage = new Stage();
