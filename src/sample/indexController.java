@@ -75,9 +75,88 @@ import java.util.*;
         // Events of buttons...
 
         public void ProfileClickAction(ActionEvent actionEvent) throws IOException {
-            CreateNewProfile createNewProfile = new CreateNewProfile();
+      /*      CreateNewProfile createNewProfile = new CreateNewProfile();
             createNewProfile.testingMethod();
-        }
+        */
+
+
+                Stage displayStage = new Stage();
+                displayStage.setTitle("Add new player");
+                VBox layout = new VBox(10);
+                displayStage.setScene(new Scene(layout, 300, 500));
+
+                Label idLabel = new Label("Player ID: ");
+                Label fnameLabel = new Label("First Name: ");
+                Label lnameLabel = new Label("Last Name: ");
+                Label addressLabel = new Label("Address: ");
+                Label postalcodeLabel = new Label("Postal code: ");
+                Label provinceLabel = new Label("Province: ");
+                Label contactNumberLabel = new Label("Contact Number: ");
+
+                TextField playeridTxt = new TextField();
+                TextField fnametxt = new TextField();
+                TextField lnametxt = new TextField();
+                TextField addresstxt = new TextField();
+                TextField postalcodetxt = new TextField();
+                TextField provincetxt = new TextField();
+                TextField contacttxt = new TextField();
+                Button AddButton = new Button("Add player");
+
+                playeridTxt.setMaxWidth(200);
+                fnametxt.setMaxWidth(200);
+                lnametxt.setMaxWidth(200);
+                addresstxt.setMaxWidth(200);
+                postalcodetxt.setMaxWidth(200);
+                provincetxt.setMaxWidth(200);
+                contacttxt.setMaxWidth(200);
+
+                layout.setPadding(new Insets(20));
+                layout.getChildren().addAll(idLabel,playeridTxt,fnameLabel, fnametxt, lnameLabel, lnametxt, addressLabel, addresstxt, postalcodeLabel, postalcodetxt, provinceLabel, provincetxt, contactNumberLabel, contacttxt
+                        , AddButton);
+
+
+
+
+                    EventHandler<ActionEvent> addplayer = new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent actionEvent) {
+                            try {
+                                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/assignment?autoReconnect=true&useSSL=false", "root", "");
+                                String addQuery = "INSERT INTO `player`(`player_id`, `first_name`, `last_name`, `address`, `postal_code`, `province`, `phone_number`) VALUES (?,?,?,?,?,?,?)";
+                                PreparedStatement preparedStatementforadd = connection.prepareStatement(addQuery);
+
+                                preparedStatementforadd.setString(1, playeridTxt.getText());
+                                preparedStatementforadd.setString(2, fnametxt.getText());
+                                preparedStatementforadd.setString(3, lnametxt.getText());
+                                preparedStatementforadd.setString(4, addresstxt.getText());
+                                preparedStatementforadd.setString(5, postalcodetxt.getText());
+                                preparedStatementforadd.setString(6, provincetxt.getText());
+                                preparedStatementforadd.setString(7, contacttxt.getText());
+
+                                preparedStatementforadd.executeUpdate();
+                                System.out.println("Player has been added successfully!");
+                            }
+                            catch (SQLException exception){
+                                System.out.println("Error loading data...!!!");
+                                exception.printStackTrace();
+
+                            }
+                        }
+                    };
+
+                    AddButton.setOnAction(addplayer);
+
+
+
+                    displayStage.showAndWait();
+
+                }
+
+
+
+
+
+
                 // respective player's data is displayed when clicked this button
         public void DisplaydataAction(ActionEvent actionEvent) throws IOException {
 
