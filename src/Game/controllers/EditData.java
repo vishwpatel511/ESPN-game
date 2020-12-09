@@ -1,12 +1,10 @@
-package sample;
+package Game.controllers;
 
-import javafx.application.Application;
-import javafx.event.ActionEvent;
+import Game.Main;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -21,7 +19,7 @@ public class EditData implements Initializable {
 
     public void Editfields() throws IOException {
 
-   Parent Edit = FXMLLoader.load(getClass().getResource("EditData.fxml"));
+   Parent Edit = FXMLLoader.load(getClass().getResource("FXMLs/EditData.fxml"));
    this.EditStage = new Stage();
    EditStage.setTitle("Edit player's details");
    EditStage.setScene(new Scene(Edit));

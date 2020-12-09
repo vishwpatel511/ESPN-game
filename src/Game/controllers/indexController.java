@@ -1,5 +1,7 @@
-package sample;
+package Game.controllers;
 
+import Game.DBconfigration;
+import Game.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,22 +16,18 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.*;
 import java.util.*;
 
-    public class indexController extends Main implements Initializable {
+public class indexController extends Main implements Initializable {
+
 
         private static String sqlQ = "Select * from player WHERE player_id = ?";
         private static String query = "SELECT  * FROM player";
@@ -40,14 +38,28 @@ import java.util.*;
         private ComboBox<String> playerCombobox = new ComboBox<String>();
         ObservableList<String> list = FXCollections.observableArrayList();
 
-
-        // intialize method from Initializable interface... Which intilize the stuff here it populates the combobox with lit of items...
+        // intialize method from Initializable interface... Which intialize the stuff here it populates the combobox with lit of items...
         @Override
         public void initialize(URL url, ResourceBundle resourceBundle) {
-            playerCombobox.setItems(list);
+            Parent index = null;
+         /*   try {
+                index = FXMLLoader.load(getClass().getResource("FXMLs/sample.fxml"));
+                Stage profileStage = new Stage();
+                profileStage.setTitle("Add new Player of your choice");
+              //  profileStage.setScene(new Scene(root));
+                profileStage.showAndWait();
+                playerCombobox.setItems(list);
+
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
+
+
+*/
         }
 
         // Event listener for combobox: playerid
+
         public void gettingValue() {
 
 
@@ -59,9 +71,9 @@ import java.util.*;
 
         {
 
-            try(  Connection connection = DBconfigration.getconnection();
-            Statement statement = connection.createStatement();
-                  ResultSet resultSet = statement.executeQuery(query);
+            try(Connection connection = DBconfigration.getconnection();
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
                   ) {
 
                 while (resultSet.next()) {
@@ -82,7 +94,11 @@ import java.util.*;
             createNewProfile.testingMethod();
         */
 
+     //     CreateNewProfile createNewProfile = loader.getController();
 
+
+
+/*
                 Stage displayStage = new Stage();
                 displayStage.setTitle("Add new player");
                 VBox layout = new VBox(10);
@@ -151,6 +167,11 @@ import java.util.*;
 
 
                     displayStage.showAndWait();
+*/
+
+
+
+
 
                 }
 

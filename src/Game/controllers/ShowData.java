@@ -1,6 +1,7 @@
-package sample;
+package Game.controllers;
 
 
+import Game.Main;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -46,7 +47,7 @@ public class ShowData extends Main implements Initializable {
     }
 
     public void DisplayData() throws IOException{
-        Parent displayplayers = FXMLLoader.load(getClass().getResource("ShowData.fxml"));
+        Parent displayplayers = FXMLLoader.load(getClass().getResource("FXMLs/ShowData.fxml"));
         this.displayStage = new Stage();
         displayStage.setTitle("Show player Data");
         displayStage.setScene(new Scene(displayplayers));
