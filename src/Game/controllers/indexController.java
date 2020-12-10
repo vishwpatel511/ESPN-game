@@ -1,7 +1,6 @@
 package Game.controllers;
 
 import Game.DBconfigration;
-import Game.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -28,63 +28,39 @@ import java.util.*;
 
 public class indexController extends Main implements Initializable {
 
+    @FXML
+    private Pane indexPane;
 
         private static String sqlQ = "Select * from player WHERE player_id = ?";
         private static String query = "SELECT  * FROM player";
-        private static String addQuery = "INSERT INTO `player`(`player_id`, `first_name`, `last_name`, `address`, `postal_code`, `province`, `phone_number`) VALUES (?,?,?,?,?,?,?)";
-        private static String q = "Select * from player where player_id = ?";
+
 
         @FXML
         private ComboBox<String> playerCombobox = new ComboBox<String>();
         ObservableList<String> list = FXCollections.observableArrayList();
+         String value = (this.playerCombobox.getSelectionModel().getSelectedItem());
 
-        // intialize method from Initializable interface... Which intialize the stuff here it populates the combobox with lit of items...
-        @Override
+        // Intialize method from Initializable interface... Which intialize the stuff here it populates the combobox with lit of items...
+        // Creating Database connection as well as intializing the combobox with player_ID
+    @Override
         public void initialize(URL url, ResourceBundle resourceBundle) {
-            Parent index = null;
-         /*   try {
-                index = FXMLLoader.load(getClass().getResource("FXMLs/sample.fxml"));
-                Stage profileStage = new Stage();
-                profileStage.setTitle("Add new Player of your choice");
-              //  profileStage.setScene(new Scene(root));
-                profileStage.showAndWait();
-                playerCombobox.setItems(list);
 
-            } catch (IOException exception) {
-                exception.printStackTrace();
-            }
-
-
-*/
-        }
-
-        // Event listener for combobox: playerid
-
-        public void gettingValue() {
-
-
-        }
-
-        // Creating Database connection
-
-
-
-        {
 
             try(Connection connection = DBconfigration.getconnection();
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(query);
-                  ) {
-
+            ) {
                 while (resultSet.next()) {
-                    list.add(resultSet.getString("player_id"));
+                    list.addAll(resultSet.getString("player_id"));
                     playerCombobox.getItems().addAll(list);
                 }
+                playerCombobox.setItems(list);
             } catch (SQLException exception) {
                 exception.printStackTrace();
             }
 
         }
+
 
 
         // Events of buttons...
@@ -93,96 +69,25 @@ public class indexController extends Main implements Initializable {
       /*      CreateNewProfile createNewProfile = new CreateNewProfile();
             createNewProfile.testingMethod();
         */
+            Parent root = FXMLLoader.load(getClass().getResource("../FXMLs/CreateNewProfile.fxml"));
 
-     //     CreateNewProfile createNewProfile = loader.getController();
+            Stage  primaryStage = new Stage();
+          primaryStage.setTitle("Add new player");
+            primaryStage.setScene(new Scene(root, 500, 500));
+            primaryStage.showAndWait();
 
-
-
-/*
-                Stage displayStage = new Stage();
-                displayStage.setTitle("Add new player");
-                VBox layout = new VBox(10);
-                displayStage.setScene(new Scene(layout, 300, 500));
-
-                Label idLabel = new Label("Player ID: ");
-                Label fnameLabel = new Label("First Name: ");
-                Label lnameLabel = new Label("Last Name: ");
-                Label addressLabel = new Label("Address: ");
-                Label postalcodeLabel = new Label("Postal code: ");
-                Label provinceLabel = new Label("Province: ");
-                Label contactNumberLabel = new Label("Contact Number: ");
-
-                TextField playeridTxt = new TextField();
-                TextField fnametxt = new TextField();
-                TextField lnametxt = new TextField();
-                TextField addresstxt = new TextField();
-                TextField postalcodetxt = new TextField();
-                TextField provincetxt = new TextField();
-                TextField contacttxt = new TextField();
-                Button AddButton = new Button("Add player");
-
-                playeridTxt.setMaxWidth(200);
-                fnametxt.setMaxWidth(200);
-                lnametxt.setMaxWidth(200);
-                addresstxt.setMaxWidth(200);
-                postalcodetxt.setMaxWidth(200);
-                provincetxt.setMaxWidth(200);
-                contacttxt.setMaxWidth(200);
-
-                layout.setPadding(new Insets(20));
-                layout.getChildren().addAll(idLabel,playeridTxt,fnameLabel, fnametxt, lnameLabel, lnametxt, addressLabel, addresstxt, postalcodeLabel, postalcodetxt, provinceLabel, provincetxt, contactNumberLabel, contacttxt
-                        , AddButton);
-
-
-
-
-                    EventHandler<ActionEvent> addplayer = new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent actionEvent) {
-                            try(Connection connection = DBconfigration.getconnection();
-                                PreparedStatement preparedStatementforadd = connection.prepareStatement(addQuery);
-
-                            ) {
-                                preparedStatementforadd.setString(1, playeridTxt.getText());
-                                preparedStatementforadd.setString(2, fnametxt.getText());
-                                preparedStatementforadd.setString(3, lnametxt.getText());
-                                preparedStatementforadd.setString(4, addresstxt.getText());
-                                preparedStatementforadd.setString(5, postalcodetxt.getText());
-                                preparedStatementforadd.setString(6, provincetxt.getText());
-                                preparedStatementforadd.setString(7, contacttxt.getText());
-                                preparedStatementforadd.executeUpdate();
-
-                                System.out.println("Player has been added successfully!");
-                            }
-                            catch (SQLException exception){
-                                System.out.println("Error loading data...!!!");
-                                exception.printStackTrace();
-
-                            }
-                        }
-                    };
-
-                    AddButton.setOnAction(addplayer);
-
-
-
-                    displayStage.showAndWait();
-*/
-
-
-
-
-
-                }
-
-
-
-
+        }
 
 
                 // respective player's data is displayed when clicked this button
         public void DisplaydataAction(ActionEvent actionEvent) throws IOException {
+            Parent root1 = FXMLLoader.load(getClass().getResource("../FXMLs/ShowData.fxml"));
 
+            Stage  primaryStage = new Stage();
+            primaryStage.setTitle("Add new player");
+            primaryStage.setScene(new Scene(root1, 500, 500));
+            primaryStage.showAndWait();
+/*
             try(Connection connection = DBconfigration.getconnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(q);
                 ) {
@@ -228,8 +133,8 @@ public class indexController extends Main implements Initializable {
 
 
         }
-
-        // Player can update their data by clicking the upadate button
+*/
+        }      // Player can update their data by clicking the upadate button
         public void UpdateButtonAction(ActionEvent actionEvent) throws IOException, SQLException {
         //    EditData edit = new EditData();
         //    edit.Editfields();
@@ -316,6 +221,7 @@ public class indexController extends Main implements Initializable {
                     e.printStackTrace();
                     System.out.println("Error loading data");
                 }
+
             }
         }
 

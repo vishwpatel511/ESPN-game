@@ -17,18 +17,18 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
         </content>
       </ScrollPane>
-      <Pane prefHeight="600.0" prefWidth="620.0">
+      <Pane fx:id="indexPane" prefHeight="600.0" prefWidth="620.0">
          <children>
             <Label alignment="CENTER" layoutX="1.0" layoutY="2.0" prefHeight="80.0" prefWidth="417.0" text="ESPN Cricket Game" textFill="#1b0303">
                <font>
                   <Font size="34.0" />
                </font>
             </Label>
-            <Button layoutX="129.0" layoutY="244.0" mnemonicParsing="false" onAction="#ProfileClickAction" prefHeight="32.0" prefWidth="141.0" text="Create new profile" />
+            <Button fx:id="AddPlayer" layoutX="129.0" layoutY="244.0" mnemonicParsing="false" onAction="#ProfileClickAction" prefHeight="32.0" prefWidth="141.0" text="Create new profile" />
             <Button layoutX="129.0" layoutY="287.0" mnemonicParsing="false" onAction="#UpdateButtonAction" prefHeight="32.0" prefWidth="141.0" text="Update your profile" />
             <Button layoutX="129.0" layoutY="332.0" mnemonicParsing="false" onAction="#DisplaydataAction" prefHeight="32.0" prefWidth="141.0" text="Display your record" />
             <Label layoutX="42.0" layoutY="117.0" text="Select your player ID:" />
-            <ComboBox fx:id="playerCombobox" layoutX="185.0" layoutY="113.0" onAction="#gettingValue" />
+            <ComboBox fx:id="playerCombobox" layoutX="185.0" layoutY="113.0"/>
          </children>
       </Pane>
    </children>

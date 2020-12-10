@@ -1,6 +1,5 @@
 package Game.controllers;
 
-import Game.Main;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -15,7 +14,6 @@ public class EditData implements Initializable {
 
 
     private Stage EditStage;
-    Main main = new Main();
 
     public void Editfields() throws IOException {
 

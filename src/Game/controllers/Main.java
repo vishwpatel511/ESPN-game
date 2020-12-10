@@ -1,4 +1,4 @@
-package Game;
+package Game.controllers;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +23,7 @@ public class Main extends Application implements Initializable {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLs/sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../FXMLs/sample.fxml"));
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 475, 475));
         primaryStage.show();
